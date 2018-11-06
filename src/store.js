@@ -1,5 +1,10 @@
-import { combineReducers } from "redux";
+import { createStore, combineReducers } from "redux";
+import cardsReducer from './reducers/cards'
 
-const store = combineReducers({});
+const store = createStore(
+  combineReducers({
+    cardsReducer
+  })
+);
 
 export default store;
