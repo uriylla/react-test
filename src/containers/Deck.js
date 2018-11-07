@@ -1,9 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CardList from '../components/CardsList';
+import Card from '../components/Card';
+import Deck from '../components/Deck';
 import { requestCardsData } from '../actions/data';
 
-export class Deck extends React.Component {
+
+export class DeckContainer extends React.Component {
 
   componentDidMount () {
     this.props.requestCardsData();
@@ -11,9 +14,22 @@ export class Deck extends React.Component {
 
   render() {
     return (
-      <CardList>
-        cards
-      </ CardList> 
+      <Deck>
+        <CardList>
+          {
+            this.props.whiteCards && 
+            this.props.whiteCards.slice(0,20).map((card, i) =>
+              <Card key={i}>{card}</Card>)
+          }
+        </ CardList> 
+        <CardList>
+        {
+          this.props.blackCards && 
+          this.props.blackCards.slice(0,20).map(({text, pick}, i) =>
+            <Card key={i}>{text} {pick}</Card>)
+        }
+        </ CardList> 
+    </Deck>
     )
   } 
 }
@@ -25,6 +41,8 @@ const mapDispatchToProps = dispatch => {
 }
 
 const mapStateToProps = (state) => ({
-  state
+  whiteCards: state.data.whiteCards,
+  blackCards: state.data.blackCards
 })
-export default connect(undefined, mapDispatchToProps)(Deck)
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckContainer)
