@@ -3,7 +3,7 @@ import { Router, Route } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 
 import Header from './components/Header';
-import CardsList from './containers/CardsList';
+import Deck from './containers/Deck';
 
 export const history = createHistory()
 
@@ -11,7 +11,7 @@ const AppRouter = () => (
   <Router history={history}>
     <div>
       <Header > Card  game maker </Header>
-      <Route path="/" component={CardsList}/>
+      <Route path="/" component={Deck}/>
     </div>
   </Router>
 );
