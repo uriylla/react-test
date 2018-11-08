@@ -3,7 +3,7 @@ import { Router, Route } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 
 import Header from './components/Header';
-import Deck from './containers/Deck';
+import Deck from './components/Deck';
 
 export const history = createHistory()
 
