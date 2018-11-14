@@ -6,7 +6,6 @@ import { fetchData } from './fetch';
 function* getCardsDataa(action) {
   try {
     const data = yield call(fetchData);
-    console.log(data);
     yield put(recieveCardsData(data));
   } catch (e) {
     console.log(e);

@@ -23,8 +23,8 @@ export class Deck extends React.Component {
   render() {
     return (
       <DeckWrapper>
-        <WhiteCards />
-        <BlackCards />
+        {<WhiteCards />}
+        {<BlackCards />}
       </DeckWrapper>
     )
   }

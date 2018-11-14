@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Card from '../components/Card';
+import Card from '../components/CardView';
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,6 +15,6 @@ export default ({cards}) => (
 
   <Wrapper>
     {cards && cards.slice(0,50).map((card, i) =>
-      <Card key={i} card={card} />)}
+      <Card key={i} {...card} />)}
   </Wrapper>
 )
