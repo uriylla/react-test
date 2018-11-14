@@ -1,5 +1,6 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import dataReducer from './reducers/data';
+import cardsReducer from './reducers/cards';
 
 import createSagaMiddleware from 'redux-saga'
 
@@ -10,7 +11,8 @@ const sagaMiddleware = createSagaMiddleware()
 
 const store = createStore(
   combineReducers({
-    data: dataReducer
+    data: dataReducer,
+    cards: cardsReducer
   }),
   compose(
     applyMiddleware(sagaMiddleware),
