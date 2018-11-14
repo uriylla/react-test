@@ -15,6 +15,6 @@ export default ({cards}) => (
 
   <Wrapper>
     {cards && cards.slice(0,50).map((card, i) =>
-      <Card key={i} {...card} />)}
+      <Card key={i} isPreview={true} {...card} />)}
   </Wrapper>
 )

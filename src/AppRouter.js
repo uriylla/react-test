@@ -13,8 +13,7 @@ const addCard = (props) =>
 <Modal>
   <CardView 
     text={'Some Card'}
-    pick={1}
-    adding={true}/>
+    pick={1} />
 </Modal>
 
 const AppRouter = () => (
