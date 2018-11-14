@@ -6,14 +6,17 @@ import Header from './blocks/Header';
 import Deck from './components/Deck';
 import CardView from './components/CardView';
 import Modal from './blocks/Modal';
+import CloseButton from './elements/CloseButton';
 
 export const history = createHistory()
 
 const addCard = (props) =>
 <Modal>
+  <CloseButton onClick={() => history.push('/')}>Close</CloseButton>
   <CardView 
     text={'Some Card'}
-    pick={1} />
+    pick={1}
+    adding={true}/>
 </Modal>
 
 const AppRouter = () => (
