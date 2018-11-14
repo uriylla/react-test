@@ -2,8 +2,11 @@ import React from 'react'
 import Card from '../blocks/Card';
 import Button from '../elements/Button';
 import isInt from 'validator/lib/isInt';
+import uniqid from 'uniqid';
+import { connect } from 'react-redux';
+import { addCard } from '../actions/cards';
 
-export default class CardView extends React.Component {
+export class CardView extends React.Component {
 
   constructor(props) {
     super(props);
@@ -12,15 +15,12 @@ export default class CardView extends React.Component {
     this.handleAddClick = this.handleAddClick.bind(this);
     this.handleApplyClick = this.handleApplyClick.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
-    this.state = {
-      ...props,
-      isBlack: props.pick !== undefined
-    }
+    this.state = { ...props }
   }
 
-  isEditable () {
-    return this.state.editing || this.state.adding;
-  }
+  isEditable () { return this.state.editing || this.state.adding; }
+
+  isBlack () { return !!this.state.pick }
 
   onTextChange (e) {
     const value = e.currentTarget.value;
@@ -33,7 +33,11 @@ export default class CardView extends React.Component {
   }
 
   handleAddClick () {
-    console.log('add card');  
+    this.props.addCard({
+      id: uniqid(),
+      text: this.state.text,
+      pick: this.state.pick
+    });
   }
 
   handleApplyClick () {
@@ -48,7 +52,7 @@ export default class CardView extends React.Component {
     return (
       <Card>
         <Card.Text onChange={this.onTextChange} editable={this.isEditable()} value={this.state.text} type="text" />
-        {this.state.isBlack &&
+        {this.isBlack() &&
           <Card.Pick onChange={this.onPickChange} editable={this.isEditable()} value={this.state.pick} maxLength={1} type="text" />}
         {this.state.adding && 
           <Button onClick={this.handleAddClick} primary>Add</Button>}
@@ -60,3 +64,9 @@ export default class CardView extends React.Component {
     )
   }
 }
+
+const mapDispatchToProps = ({
+  addCard: card => addCard(card)
+});
+
+export default connect(undefined, mapDispatchToProps)(CardView);
