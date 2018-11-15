@@ -1,8 +1,7 @@
-import uniqid from 'uniqid';
 
 const formatCardsData = (data) => {
-  let cards = data.blackCards.map(card => ({ ...card, id: uniqid() }))
-  data.whiteCards.map(card => cards.push({text: card, id: uniqid() }))
+  let cards = data.blackCards.map(card => ({ ...card }))
+  data.whiteCards.map(card => cards.push({text: card }))
   return cards;
 }
 

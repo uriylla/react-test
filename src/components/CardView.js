@@ -7,8 +7,9 @@ import uniqid from 'uniqid';
 
 import Card from '../blocks/Card';
 import Button from '../elements/Button';
+import P from '../elements/P';
 
-import { addCard, editCard } from '../actions/cards';
+import { addCard, editCard, removeCard } from '../actions/cards';
 import { getCardById } from '../selectors/cards';
 
 
@@ -22,6 +23,7 @@ export class CardView extends React.Component {
     this.handleApplyClick = this.handleApplyClick.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
     this.handleCardClick = this.handleCardClick.bind(this);
+    this.handleRemoveClick = this.handleRemoveClick.bind(this);
     this.state = {
       text: '',
       pick: '',
@@ -46,11 +48,7 @@ export class CardView extends React.Component {
   handleAddClick () {
     const { history: { push }, addCard } = this.props;
     const { text, pick } = this.state;
-    addCard({
-      id: uniqid(),
-      text,
-      pick
-    });
+    addCard({ text, pick });
     push('/');
   }
 
@@ -65,6 +63,12 @@ export class CardView extends React.Component {
     this.setState((state) => ({ adding: false, editing: true }));
   }
 
+  handleRemoveClick () {
+    const { history: { push }, removeCard } = this.props;
+    removeCard(this.props.id);
+    push('/');
+  }
+
   handleCardClick () {
     const { history: { push }, id, isPreview } = this.props;
     isPreview && push(`/card/${id}`);
@@ -72,20 +76,24 @@ export class CardView extends React.Component {
 
   render() {
     return (
-      <Card onClick={this.handleCardClick}>
+      <Card isBlack={this.isBlack()} isPreview={this.props.isPreview} onClick={this.handleCardClick}>
         <Card.Text
           onChange={this.onTextChange}
           editable={this.isEditable()}
+          isBlack={this.isBlack()}
           disabled={!this.isEditable()}
           value={this.props.isPreview ? this.props.text : this.state.text}
           type="text" />
         {(this.isBlack() || this.isEditable()) &&
-          <Card.Pick
-            onChange={this.onPickChange}
-            editable={this.isEditable()}
-            value={this.props.isPreview ? this.props.pick: this.state.pick}
-            maxLength={1}
-            type="text" />}
+          <div style={{display: 'flex'}}>
+            <P>Pick </P>
+            <Card.Pick
+              onChange={this.onPickChange}
+              editable={this.isEditable()}
+              value={this.props.isPreview ? this.props.pick: this.state.pick}
+              maxLength={1}
+              type="text" />
+          </div>}
         {this.state.adding && 
           <Button
             onClick={this.handleAddClick}
@@ -98,10 +106,16 @@ export class CardView extends React.Component {
             secondary>Apply
           </Button>}
         {!this.isEditable() && !this.props.isPreview &&
-          <Button
-            onClick={this.handleEditClick}
-            secondary>Edit
-          </Button>}
+          <div>
+            <Button
+              onClick={this.handleEditClick}
+              secondary>Edit
+            </Button>
+            <Button
+              onClick={this.handleRemoveClick}
+              secondary>Remove
+            </Button>
+          </div>}
       </Card>
     )
   }
@@ -110,6 +124,7 @@ export class CardView extends React.Component {
 const mapDispatchToProps = (dispatch) => ({
   addCard: card => dispatch(addCard(card)),
   editCard: card => dispatch(editCard(card)),
+  removeCard: (id) => dispatch(removeCard(id))
 });
 
 const mapStateToProps = (state, props ) => {

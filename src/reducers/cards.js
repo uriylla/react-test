@@ -1,4 +1,4 @@
-import { ADD_CARD, EDIT_CARD, CLEAR_DECK } from '../actions/cards';
+import { ADD_CARD, EDIT_CARD, REMOVE_CARD, CLEAR_DECK } from '../actions/cards';
 import { RECIEVE_CARDS_DATA } from '../actions/data';
 
 export default (state = [], action) => {
@@ -12,6 +12,8 @@ export default (state = [], action) => {
       ];
     case EDIT_CARD:
       return state.map(card => card.id === action.card.id ? action.card : card);
+    case REMOVE_CARD:
+      return state.filter(card => card.id !== action.id);
     case CLEAR_DECK:
       return [];
     default:
