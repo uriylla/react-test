@@ -20,10 +20,12 @@ export class Deck extends React.Component {
   constructor (props) {
     super(props);
     this.addNewCard = this.addNewCard.bind(this);
-    props.requestCardsData();
+    this.fetchCah = this.fetchCah.bind(this);
   }
 
   addNewCard () { this.props.history.push('/add') };
+
+  fetchCah () { this.props.requestCardsData() };
 
   render() {
     return (
@@ -33,6 +35,7 @@ export class Deck extends React.Component {
           <BlackCards />
         </DeckWrapper>
         <Button onClick={this.addNewCard}>New Card</Button>
+        <Button onClick={this.fetchCah}>Fetch original CAH cards</Button>
       </div>
     )
   }

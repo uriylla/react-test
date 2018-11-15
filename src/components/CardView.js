@@ -31,12 +31,12 @@ export class CardView extends React.Component {
 
   onTextChange (e) {
     const value = e.currentTarget.value;
-    this.setState((state) => ({ text: value }))    
+    this.setState((state) => ({ text: value }));  
   }
 
   onPickChange (e) {
     const value = e.currentTarget.value;
-    this.setState((state) => ({ pick: isInt(value) ? value : '' }))
+    this.setState((state) => ({ pick: isInt(value) ? value : '' }));
   }
 
   handleAddClick () {
@@ -58,12 +58,12 @@ export class CardView extends React.Component {
   }
 
   handleEditClick () {
-    this.setState((state) => ({ adding: false, editing: true }))
+    this.setState((state) => ({ adding: false, editing: true }));
   }
 
   handleCardClick () {
     const { history: { push }, id, isPreview } = this.props;
-    isPreview && push(`/card/${id}`)
+    isPreview && push(`/card/${id}`);
   }
 
   render() {
