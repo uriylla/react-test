@@ -14,7 +14,7 @@ import Button from '../elements/Button';
 
 const DeckWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   margin: 0 auto;
   max-width: 80vw;
   min-height: 20vh;
