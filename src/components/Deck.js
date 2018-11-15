@@ -2,8 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import WhiteCards from '../components/WhiteCards';
+import { withRouter } from 'react-router';
 import BlackCards from '../components/BlackCards';
 import { requestCardsData } from '../actions/data';
+import Button from '../elements/Button';
 
 const DeckWrapper = styled.div`
   display: flex;
@@ -17,15 +19,21 @@ export class Deck extends React.Component {
 
   constructor (props) {
     super(props);
+    this.addNewCard = this.addNewCard.bind(this);
     props.requestCardsData();
   }
 
+  addNewCard () { this.props.history.push('/add') };
+
   render() {
     return (
-      <DeckWrapper>
-        {<WhiteCards />}
-        {<BlackCards />}
-      </DeckWrapper>
+      <div>
+        <DeckWrapper>
+          <WhiteCards />
+          <BlackCards />
+        </DeckWrapper>
+        <Button onClick={this.addNewCard}>New Card</Button>
+      </div>
     )
   }
 }
@@ -36,4 +44,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(undefined, mapDispatchToProps)(Deck)
+export default connect(undefined, mapDispatchToProps)(withRouter(Deck))
