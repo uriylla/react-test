@@ -6,8 +6,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  width: 100;
+  min-height: 20px;
   margin: 5px;
-  overflow: scroll;
   background: darkgray;
 `
 

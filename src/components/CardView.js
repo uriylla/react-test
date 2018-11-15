@@ -1,12 +1,16 @@
-import React from 'react'
-import Card from '../blocks/Card';
-import Button from '../elements/Button';
+import React from 'react';
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
+
 import isInt from 'validator/lib/isInt';
 import uniqid from 'uniqid';
-import { connect } from 'react-redux';
+
+import Card from '../blocks/Card';
+import Button from '../elements/Button';
+
 import { addCard, editCard } from '../actions/cards';
 import { getCardById } from '../selectors/cards';
-import { withRouter } from 'react-router'
+
 
 export class CardView extends React.Component {
 

@@ -2,7 +2,6 @@ import React from 'react';
 import { Router, Route } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 
-import Header from './blocks/Header';
 import Deck from './components/Deck';
 import CardView from './components/CardView';
 import Modal from './blocks/Modal';
@@ -25,7 +24,6 @@ const viewCard = (props) =>
 const AppRouter = () => (
   <Router history={history}>
     <div>
-      <Header > Card  game maker </Header>
       <Route path="/" component={Deck}/>
       <Route path="/add" render={addCard}/>
       <Route path="/card/:id" render={viewCard}/>

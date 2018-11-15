@@ -1,10 +1,15 @@
 import React from 'react';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
-import WhiteCards from '../components/WhiteCards';
 import { withRouter } from 'react-router';
-import BlackCards from '../components/BlackCards';
+
 import { requestCardsData } from '../actions/data';
+import { clearDeck } from '../actions/cards';
+
+import styled from 'styled-components';
+
+import WhiteCards from '../components/WhiteCards';
+import H1 from '../elements/H1';
+import BlackCards from '../components/BlackCards';
 import Button from '../elements/Button';
 
 const DeckWrapper = styled.div`
@@ -12,30 +17,47 @@ const DeckWrapper = styled.div`
   justify-content: center;
   margin: 0 auto;
   max-width: 80vw;
-  height: 90vh;
+  min-height: 20vh;
+  height: 100%;
   background-color: whitesmoke;
 `
+
+const HeaderWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width: 80vw;
+  height: 40px;
+`
+
 export class Deck extends React.Component {
 
   constructor (props) {
     super(props);
     this.addNewCard = this.addNewCard.bind(this);
     this.fetchCah = this.fetchCah.bind(this);
+    this.clearDeck = this.clearDeck.bind(this);
   }
 
   addNewCard () { this.props.history.push('/add') };
 
   fetchCah () { this.props.requestCardsData() };
 
+  clearDeck () { this.props.clearDeck() };
+
   render() {
     return (
       <div>
+        <HeaderWrapper>
+          <Button onClick={this.addNewCard}>New Card</Button>
+          <H1>Card Game Maker</H1>
+          <Button onClick={this.fetchCah}>Fetch original CAH cards</Button>
+          <Button onClick={this.clearDeck}>Clear Deck</Button>
+        </HeaderWrapper>
         <DeckWrapper>
           <WhiteCards />
           <BlackCards />
         </DeckWrapper>
-        <Button onClick={this.addNewCard}>New Card</Button>
-        <Button onClick={this.fetchCah}>Fetch original CAH cards</Button>
       </div>
     )
   }
@@ -43,7 +65,8 @@ export class Deck extends React.Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    requestCardsData: () => dispatch(requestCardsData())
+    requestCardsData: () => dispatch(requestCardsData()),
+    clearDeck: () => dispatch(clearDeck())
   }
 }
 
