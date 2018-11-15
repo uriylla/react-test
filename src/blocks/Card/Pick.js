@@ -1,13 +1,13 @@
 import styled from 'styled-components';
+import Input from '../../elements/Input';
 
-export default styled.input`
-  font-family: Arial, Helvetica, sans-serif;
+export default styled(Input)`
   max-width: 50px;
-  font-weight: bold;
-  font-size: '8px';
-  font-size: '0.5em';
-  background: none;
-  color: white; 
-  border: ${props => props.editable ? 'default' : 'none'};
+  text-align: center;
+  outline: none;
+  border: none;
+  color: ${props => props.isBlack ? 'ghostwhite' : '#232323'};
+  border-bottom: ${props => props.editable ? 'solid 2px white' : 'none'};
+  border-color: ${props => props.isBlack ? 'ghostwhite' : '#232323'};
   pointer-events: ${props => props.editable ? 'default' : 'none'};
 `

@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 export default styled.div`
-  position: absolute;
+  position: fixed;
   display: flex;
   align-items: center;
+  z-index: 3;
   justify-content: center;
   width: 100%;
   height: 100%;

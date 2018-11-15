@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export default styled.h1`
-  color: ghostwhite;
+export default styled.input`
   font-family: Arial, Helvetica, sans-serif;
-  font-weight: bolder;
-  margin: 0;
+  font-weight: bold;
+  background: none;
+  color: white; 
 `

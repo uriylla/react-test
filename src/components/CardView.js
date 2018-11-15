@@ -3,7 +3,6 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 
 import isInt from 'validator/lib/isInt';
-import uniqid from 'uniqid';
 
 import Card from '../blocks/Card';
 import Button from '../elements/Button';
@@ -82,13 +81,16 @@ export class CardView extends React.Component {
           editable={this.isEditable()}
           isBlack={this.isBlack()}
           disabled={!this.isEditable()}
-          value={this.props.isPreview ? this.props.text : this.state.text}
-          type="text" />
-        {(this.isBlack() || this.isEditable()) &&
-          <div style={{display: 'flex'}}>
+          focus={!this.isEditable()}
+          value={this.props.isPreview ? this.props.text : this.state.text}/>
+        <div style={{position: 'relative', bot: '0px', display: 'flex', flexDirection: 'column'}}>
+        {(this.isBlack() || this.isEditable()) && !this.props.isPreview &&
+          <div style={{display: 'flex', height: '70px'}}>
             <P>Pick </P>
             <Card.Pick
               onChange={this.onPickChange}
+              disabled={!this.isEditable()}
+              isBlack={this.isBlack()}
               editable={this.isEditable()}
               value={this.props.isPreview ? this.props.pick: this.state.pick}
               maxLength={1}
@@ -97,25 +99,26 @@ export class CardView extends React.Component {
         {this.state.adding && 
           <Button
             onClick={this.handleAddClick}
-            primary>
+            inverse={this.isBlack()}>
               Add
           </Button>}
         {this.state.editing && 
           <Button
             onClick={this.handleApplyClick}
-            secondary>Apply
+            inverse={this.isBlack()}>Apply
           </Button>}
         {!this.isEditable() && !this.props.isPreview &&
           <div>
             <Button
               onClick={this.handleEditClick}
-              secondary>Edit
+              inverse={this.isBlack()}>Edit
             </Button>
             <Button
               onClick={this.handleRemoveClick}
-              secondary>Remove
+              inverse={this.isBlack()}>Remove
             </Button>
           </div>}
+        </div>
       </Card>
     )
   }

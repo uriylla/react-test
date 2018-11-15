@@ -18,16 +18,19 @@ const DeckWrapper = styled.div`
   margin: 0 auto;
   max-width: 80vw;
   min-height: 20vh;
-  height: 100%;
-  background-color: whitesmoke;
+  margin-top: 70px;
 `
 
 const HeaderWrapper = styled.div`
+  position: fixed;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  background-color: #232323;
+  z-index: 2;
+  align-items: center;
   margin: 0 auto;
-  width: 80vw;
-  height: 40px;
+  width: 100%;
+  height: 70px;
 `
 
 export class Deck extends React.Component {
@@ -47,12 +50,14 @@ export class Deck extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{width: '100%', height: '100vh', overflow: 'scroll', overflowX: 'hidden', backgroundColor: '#232323'}}>
         <HeaderWrapper>
-          <Button onClick={this.addNewCard}>New Card</Button>
           <H1>Card Game Maker</H1>
-          <Button onClick={this.fetchCah}>Fetch original CAH cards</Button>
-          <Button onClick={this.clearDeck}>Clear Deck</Button>
+          <div style={{display: 'flex'}}>
+            <Button inverse onClick={this.addNewCard}>New Card</Button>
+            <Button inverse onClick={this.fetchCah}>Fetch original CAH cards</Button>
+            <Button inverse onClick={this.clearDeck}>Clear Deck</Button>
+          </div>
         </HeaderWrapper>
         <DeckWrapper>
           <WhiteCards />
