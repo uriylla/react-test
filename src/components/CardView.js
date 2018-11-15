@@ -105,17 +105,20 @@ export class CardView extends React.Component {
         {this.state.editing && 
           <Button
             onClick={this.handleApplyClick}
-            inverse={this.isBlack()}>Apply
+            inverse={this.isBlack()}>
+              Apply
           </Button>}
         {!this.isEditable() && !this.props.isPreview &&
           <div>
             <Button
               onClick={this.handleEditClick}
-              inverse={this.isBlack()}>Edit
+              inverse={this.isBlack()}>
+                Edit
             </Button>
             <Button
               onClick={this.handleRemoveClick}
-              inverse={this.isBlack()}>Remove
+              inverse={this.isBlack()}>
+                Remove
             </Button>
           </div>}
         </div>
