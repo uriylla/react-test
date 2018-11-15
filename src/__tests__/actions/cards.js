@@ -9,7 +9,7 @@ import {
   REMOVE_CARD
 } from '../../actions/cards';
 
-import {whiteCards, blackCards } from '../fixtures/cards';
+import {whiteCards, blackCards } from '../../fixtures/cards';
 
 test('should create addCard action for a black card', () => {
   const { text, pick } = blackCards[0];

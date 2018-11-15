@@ -5,7 +5,7 @@ import {
   recieveCardsData
 } from "../../actions/data";
 
-import { cards } from '../fixtures/cards';
+import { cards } from '../../fixtures/cards';
 
 test('should create requestCardsData action', () => {
   const action = requestCardsData();
