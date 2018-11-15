@@ -13,10 +13,13 @@ export const history = createHistory()
 const addCard = (props) =>
 <Modal>
   <CloseButton onClick={() => history.push('/')}>Close</CloseButton>
-  <CardView 
-    text={'Some Card'}
-    pick={1}
-    adding={true}/>
+  <CardView adding={true}/>
+</Modal>
+
+const viewCard = (props) =>
+<Modal>
+  <CloseButton onClick={() => history.push('/')}>Close</CloseButton>
+  <CardView {...props} id={props.match.id}/>
 </Modal>
 
 const AppRouter = () => (
@@ -25,6 +28,7 @@ const AppRouter = () => (
       <Header > Card  game maker </Header>
       <Route path="/" component={Deck}/>
       <Route path="/add" render={addCard}/>
+      <Route path="/card/:id" render={viewCard}/>
     </div>
   </Router>
 );

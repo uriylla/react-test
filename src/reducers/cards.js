@@ -1,4 +1,4 @@
-import { ADD_CARD } from '../actions/cards';
+import { ADD_CARD, EDIT_CARD } from '../actions/cards';
 
 export default (state = [], action) => {
   switch (action.type) {
@@ -7,6 +7,8 @@ export default (state = [], action) => {
         ...state,
         action.card
       ];
+    case EDIT_CARD:
+      return state.map(card => card.id === action.card.id ? action.card : card);
     default:
       return state
   }

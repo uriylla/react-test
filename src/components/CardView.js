@@ -4,7 +4,9 @@ import Button from '../elements/Button';
 import isInt from 'validator/lib/isInt';
 import uniqid from 'uniqid';
 import { connect } from 'react-redux';
-import { addCard } from '../actions/cards';
+import { addCard, editCard } from '../actions/cards';
+import { getCardById } from '../selectors/cards';
+import { withRouter } from 'react-router'
 
 export class CardView extends React.Component {
 
@@ -15,7 +17,12 @@ export class CardView extends React.Component {
     this.handleAddClick = this.handleAddClick.bind(this);
     this.handleApplyClick = this.handleApplyClick.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
-    this.state = { ...props }
+    this.handleCardClick = this.handleCardClick.bind(this);
+    this.state = {
+      text: '',
+      pick: '',
+      ...props
+    }
   }
 
   isEditable () { return this.state.editing || this.state.adding; }
@@ -29,44 +36,82 @@ export class CardView extends React.Component {
 
   onPickChange (e) {
     const value = e.currentTarget.value;
-    this.setState((state) => ({ pick: isInt(value) ? value : '' }))    
+    this.setState((state) => ({ pick: isInt(value) ? value : '' }))
   }
 
   handleAddClick () {
-    this.props.addCard({
+    const { history: { push }, addCard } = this.props;
+    const { text, pick } = this.state;
+    addCard({
       id: uniqid(),
-      text: this.state.text,
-      pick: this.state.pick
+      text,
+      pick
     });
+    push('/');
   }
 
   handleApplyClick () {
-    console.log('save changes');
+    const { text, pick } = this.state;
+    const { history: { push }, id, editCard } = this.props;
+    editCard({ id, text, pick });
+    push('/');
   }
 
   handleEditClick () {
-    this.setState((state) => ({ adding: false, editing: true }))   
+    this.setState((state) => ({ adding: false, editing: true }))
+  }
+
+  handleCardClick () {
+    const { history: { push }, id, isPreview } = this.props;
+    isPreview && push(`/card/${id}`)
   }
 
   render() {
     return (
-      <Card>
-        <Card.Text onChange={this.onTextChange} editable={this.isEditable()} value={this.state.text} type="text" />
-        {this.isBlack() &&
-          <Card.Pick onChange={this.onPickChange} editable={this.isEditable()} value={this.state.pick} maxLength={1} type="text" />}
+      <Card onClick={this.handleCardClick}>
+        <Card.Text
+          onChange={this.onTextChange}
+          editable={this.isEditable()}
+          disabled={!this.isEditable()}
+          value={this.props.isPreview ? this.props.text : this.state.text}
+          type="text" />
+        {(this.isBlack() || this.isEditable()) &&
+          <Card.Pick
+            onChange={this.onPickChange}
+            editable={this.isEditable()}
+            value={this.props.isPreview ? this.props.pick: this.state.pick}
+            maxLength={1}
+            type="text" />}
         {this.state.adding && 
-          <Button onClick={this.handleAddClick} primary>Add</Button>}
+          <Button
+            onClick={this.handleAddClick}
+            primary>
+              Add
+          </Button>}
         {this.state.editing && 
-          <Button onClick={this.handleApplyClick} secondary>Apply</Button>}
+          <Button
+            onClick={this.handleApplyClick}
+            secondary>Apply
+          </Button>}
         {!this.isEditable() && !this.props.isPreview &&
-          <Button onClick={this.handleEditClick} secondary>Edit</Button>}
+          <Button
+            onClick={this.handleEditClick}
+            secondary>Edit
+          </Button>}
       </Card>
     )
   }
 }
 
-const mapDispatchToProps = ({
-  addCard: card => addCard(card)
+const mapDispatchToProps = (dispatch) => ({
+  addCard: card => dispatch(addCard(card)),
+  editCard: card => dispatch(editCard(card)),
 });
 
-export default connect(undefined, mapDispatchToProps)(CardView);
+const mapStateToProps = (state, props ) => {
+  const id = props.match && props.match.params.id;
+  const card = getCardById(state.cards, id);
+  return { ...card };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(CardView));
