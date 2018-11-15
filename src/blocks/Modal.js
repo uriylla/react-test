@@ -9,5 +9,5 @@ export default styled.div`
   width: 100%;
   height: 100%;
   top: 0;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
 `;
