@@ -2,7 +2,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 import Card from '../../blocks/Card';
 import Button from '../../elements/Button';
-import renderer from 'react-test-renderer'
 import { CardView } from '../../components/CardView';
 import { blackCards, whiteCards } from '../../fixtures/cards';
 
