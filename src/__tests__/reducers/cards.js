@@ -55,7 +55,6 @@ test('should edit an existing black card', () => {
 test('should not edit any card with an undefined id', () => {
   const id = undefined;
   const text = 'some text';
-  const pick = 1;
   const state = cardsReducer(blackCards, {
     type: 'EDIT_CARD',
     card: { id, text }

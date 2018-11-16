@@ -12,16 +12,16 @@ import H1 from '../elements/H1';
 import BlackCards from '../components/BlackCards';
 import Button from '../elements/Button';
 
-const DeckWrapper = styled.div`
+export const DeckWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   margin: 0 auto;
-  max-width: 80vw;
+  max-width: 95vw;
   min-height: 20vh;
   margin-top: 70px;
 `
 
-const HeaderWrapper = styled.div`
+export const HeaderWrapper = styled.div`
   position: fixed;
   display: flex;
   justify-content: space-around;
@@ -52,7 +52,6 @@ export class Deck extends React.Component {
     return (
       <div style={{width: '100%', height: '100vh', overflow: 'scroll', overflowX: 'hidden', backgroundColor: '#232323'}}>
         <HeaderWrapper>
-          <H1>Card Game Maker</H1>
           <div style={{display: 'flex'}}>
             <Button inverse onClick={this.addNewCard}>New Card</Button>
             <Button inverse onClick={this.fetchCah}>Fetch original CAH cards</Button>
@@ -73,6 +72,6 @@ const mapDispatchToProps = dispatch => {
     requestCardsData: () => dispatch(requestCardsData()),
     clearDeck: () => dispatch(clearDeck())
   }
-}
+};
 
-export default connect(undefined, mapDispatchToProps)(withRouter(Deck))
+export default connect(undefined, mapDispatchToProps)(withRouter(Deck));
