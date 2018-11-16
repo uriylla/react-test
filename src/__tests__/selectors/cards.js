@@ -12,7 +12,7 @@ test('shoud get all black cards from the store', () => {
 });
 
 test('shoud find a card by its id', () => {
-  const card = cards[Math.round(Math.random()*cards.length)]
+  const card = cards[1];
   const result = getCardById(cards, card.id);
   expect(result).toEqual(card);
 })
