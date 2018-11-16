@@ -8,7 +8,6 @@ import { clearDeck } from '../actions/cards';
 import styled from 'styled-components';
 
 import WhiteCards from '../components/WhiteCards';
-import H1 from '../elements/H1';
 import BlackCards from '../components/BlackCards';
 import Button from '../elements/Button';
 

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Input from '../../elements/Input';
 
 export default styled.textarea`
   width: 100%;
