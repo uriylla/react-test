@@ -8,7 +8,6 @@ import { clearDeck } from '../actions/cards';
 import styled from 'styled-components';
 
 import WhiteCards from '../components/WhiteCards';
-import H1 from '../elements/H1';
 import BlackCards from '../components/BlackCards';
 import Button from '../elements/Button';
 
@@ -16,13 +15,15 @@ export const DeckWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   margin: 0 auto;
-  max-width: 95vw;
+  min-height: 100vh;
+  width: 100%;
   min-height: 20vh;
-  margin-top: 70px;
+  padding-top: 70px;
 `
 
 export const HeaderWrapper = styled.div`
   position: fixed;
+  top: 0;
   display: flex;
   justify-content: space-around;
   background-color: #232323;
@@ -50,7 +51,7 @@ export class Deck extends React.Component {
 
   render() {
     return (
-      <div style={{width: '100%', height: '100vh', overflow: 'scroll', overflowX: 'hidden', backgroundColor: '#232323'}}>
+      <div style={{position: 'relative', width: '100%', minHeight: '100vh', backgroundColor: '#232323'}}>
         <HeaderWrapper>
           <div style={{display: 'flex'}}>
             <Button inverse onClick={this.addNewCard}>New Card</Button>

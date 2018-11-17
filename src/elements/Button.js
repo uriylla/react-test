@@ -11,7 +11,8 @@ export default styled.button`
   color: ${props => props.inverse ? 'ghostwhite' : '#232323' };
   border-radius: 7px;
   height: 40px;
-  min-width: 10rem;
+  width: 13rem;
+  max-width: 30vw;
   background-color: ${props => props.inverse ? '#232323' : 'ghostwhite' };
   text-align: center;
   box-shadow: inset 0 -3px 0 0 ${props => props.inverse ? 'ghostwhite' : '#232323' };
