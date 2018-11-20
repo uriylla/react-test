@@ -1,9 +1,10 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import Card from '../../blocks/Card';
-import Button from '../../elements/Button';
 import { CardView } from '../../components/CardView';
+import CardViewButtons from '../../components/CardViewButtons';
 import { blackCards, whiteCards } from '../../fixtures/cards';
+import { CANCEL } from 'redux-saga';
 
 test('should render black card correctly', () => {
   const wrapper = mount(<CardView
@@ -11,7 +12,7 @@ test('should render black card correctly', () => {
   />);
   expect(wrapper.find(Card.Pick).length).toBe(1);
   expect(wrapper.find(Card.Text).length).toBe(1);
-  expect(wrapper.find(Button).length).toBe(2);
+  expect(wrapper.find(CardViewButtons).length).toBe(1);
   expect(wrapper.instance().isBlack()).toBeTruthy();
   expect(wrapper.instance().isEditable()).toBeFalsy();
 });
@@ -22,7 +23,7 @@ test('should render white card correctly', () => {
   />);
   expect(wrapper.find(Card.Pick).length).toBe(0);
   expect(wrapper.find(Card.Text).length).toBe(1);
-  expect(wrapper.find(Button).length).toBe(2);
+  expect(wrapper.find(CardViewButtons).length).toBe(1);
   expect(wrapper.instance().isBlack()).toBeFalsy();
   expect(wrapper.instance().isEditable()).toBeFalsy();
 });
@@ -34,7 +35,7 @@ test('should render a card on add mode correctly', () => {
   />);
   expect(wrapper.find(Card.Pick).length).toBe(1);
   expect(wrapper.find(Card.Text).length).toBe(1);
-  expect(wrapper.find(Button).length).toBe(1);
+  expect(wrapper.find(CardViewButtons).length).toBe(1);
   expect(wrapper.instance().isEditable()).toBeTruthy();
 });
 
@@ -45,7 +46,7 @@ test('should render a card on edit mode correctly', () => {
   />);
   expect(wrapper.find(Card.Pick).length).toBe(1);
   expect(wrapper.find(Card.Text).length).toBe(1);
-  expect(wrapper.find(Button).length).toBe(1);
+  expect(wrapper.find(CardViewButtons).length).toBe(1);
   expect(wrapper.instance().isEditable()).toBeTruthy();
 });
 

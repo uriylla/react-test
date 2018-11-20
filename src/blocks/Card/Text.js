@@ -4,6 +4,7 @@ export default styled.textarea`
   width: 100%;
   height: 100%;
   margin-bottom: 20px;
+  flex-grow: 1;
   resize: none;
   outline: none;
   font-family: Arial, Helvetica, sans-serif;

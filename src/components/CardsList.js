@@ -12,9 +12,10 @@ const Wrapper = styled.div`
 const CardsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
+  margin: 0 auto;
+  text-align: center;
   justify-content: center;
-  width: 100%;
-  padding-top: 30px;
+  width: 90%;
   min-height: 100px;
   margin-top: 25px;
 `;

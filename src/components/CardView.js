@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 
 import isInt from 'validator/lib/isInt';
 
+import CardViewButtons from './CardViewButtons';
 import Card from '../blocks/Card';
-import Button from '../elements/Button';
 import P from '../elements/P';
 
-import { addCard, editCard, removeCard } from '../actions/cards';
+import { addCard, editCard, removeCard, } from '../actions/cards';
 import { getCardById } from '../selectors/cards';
 
 
@@ -16,6 +16,7 @@ export class CardView extends React.Component {
 
   constructor(props) {
     super(props);
+    const {id, text, pick} = props;
     this.onTextChange = this.onTextChange.bind(this);
     this.onPickChange = this.onPickChange.bind(this);
     this.handleAddClick = this.handleAddClick.bind(this);
@@ -24,8 +25,6 @@ export class CardView extends React.Component {
     this.handleCardClick = this.handleCardClick.bind(this);
     this.handleRemoveClick = this.handleRemoveClick.bind(this);
     this.state = {
-      text: '',
-      pick: '',
       ...props
     }
   }
@@ -83,7 +82,6 @@ export class CardView extends React.Component {
           disabled={!this.isEditable()}
           focus={!this.isEditable()}
           value={this.props.isPreview ? this.props.text : this.state.text}/>
-        <div style={{position: 'relative', bot: '0px', display: 'flex', flexDirection: 'column'}}>
         {(this.isBlack() || this.isEditable()) && !this.props.isPreview &&
           <div style={{display: 'flex', height: '70px'}}>
             <P>Pick </P>
@@ -95,33 +93,17 @@ export class CardView extends React.Component {
               value={this.props.isPreview ? this.props.pick: this.state.pick}
               maxLength={1}
               type="text" />
-          </div>}
-        {this.state.adding && 
-          <Button
-            onClick={this.handleAddClick}
-            inverse={this.isBlack()}>
-              Add
-          </Button>}
-        {this.state.editing && 
-          <Button
-            onClick={this.handleApplyClick}
-            inverse={this.isBlack()}>
-              Apply
-          </Button>}
-        {!this.isEditable() && !this.props.isPreview &&
-          <div>
-            <Button
-              onClick={this.handleEditClick}
-              inverse={this.isBlack()}>
-                Edit
-            </Button>
-            <Button
-              onClick={this.handleRemoveClick}
-              inverse={this.isBlack()}>
-                Remove
-            </Button>
-          </div>}
-        </div>
+          </div>}        
+          {!this.props.isPreview && 
+          <CardViewButtons
+            adding={this.state.adding}
+            editing={this.state.editing}
+            isBlack={this.isBlack()}
+            handleAddClick={this.handleAddClick}
+            handleEditClick={this.handleEditClick}
+            handleApplyClick={this.handleApplyClick}
+            handleRemoveClick={this.handleRemoveClick}
+          />}
       </Card>
     )
   }
