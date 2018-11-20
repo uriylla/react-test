@@ -3,6 +3,7 @@ import { Router, Route } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 
 import Deck from '../components/Deck';
+import Header from '../components/Header';
 import CardView from '../components/CardView';
 import Modal from '../blocks/Modal';
 import CloseButton from '../elements/CloseButton';
@@ -24,6 +25,7 @@ const viewCard = (props) =>
 const AppRouter = () => (
   <Router history={history}>
     <div>
+      <Route path="/" component={Header}/>
       <Route path="/" component={Deck}/>
       <Route path="/add" render={addCard}/>
       <Route path="/card/:id" render={viewCard}/>
