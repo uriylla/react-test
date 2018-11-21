@@ -19,7 +19,6 @@ const Card = styled.div`
   margin: 10px;
   padding: ${props => props.isPreview ? '5px' : '30px 20px'};
   position: relative;
-
 `;
 
 Card.Text = Text;

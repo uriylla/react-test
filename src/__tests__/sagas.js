@@ -3,11 +3,7 @@ import { getCardsData } from '../sagas';
 import { call, put } from 'redux-saga/effects';
 import { fetchData } from '../fetch';
 import { cards } from '../fixtures/cards';
-
-const recieveCardsData = (data) => ({
-  type: 'RECIEVE_CARDS_DATA',
-  data: data
-})
+import { recieveCardsData } from '../actions/data';
 
 it ('test getCardsData saga', () => {
   const saga = testSaga(getCardsData);
