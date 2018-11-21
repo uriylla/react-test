@@ -1,6 +1,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import Card from '../../blocks/Card';
+import Pick from '../../blocks/Pick';
 import { CardView } from '../../components/CardView';
 import CardViewButtons from '../../components/CardViewButtons';
 import { blackCards, whiteCards } from '../../fixtures/cards';
@@ -10,7 +11,8 @@ test('should render black card correctly', () => {
   const wrapper = mount(<CardView
     {...blackCards[0]}
   />);
-  expect(wrapper.find(Card.Pick).length).toBe(1);
+  expect(wrapper.find(Pick).length).toBe(1);
+  expect(wrapper.find(Pick.Value).length).toBe(1);
   expect(wrapper.find(Card.Text).length).toBe(1);
   expect(wrapper.find(CardViewButtons).length).toBe(1);
   expect(wrapper.instance().isBlack()).toBeTruthy();
@@ -21,7 +23,7 @@ test('should render white card correctly', () => {
   const wrapper = mount(<CardView
     {...whiteCards[0]}
   />);
-  expect(wrapper.find(Card.Pick).length).toBe(0);
+  expect(wrapper.find(Pick).length).toBe(0);
   expect(wrapper.find(Card.Text).length).toBe(1);
   expect(wrapper.find(CardViewButtons).length).toBe(1);
   expect(wrapper.instance().isBlack()).toBeFalsy();
@@ -33,7 +35,8 @@ test('should render a card on add mode correctly', () => {
     {...blackCards[0]}
     adding={true}
   />);
-  expect(wrapper.find(Card.Pick).length).toBe(1);
+  expect(wrapper.find(Pick).length).toBe(1);
+  expect(wrapper.find(Pick.Value).length).toBe(1);
   expect(wrapper.find(Card.Text).length).toBe(1);
   expect(wrapper.find(CardViewButtons).length).toBe(1);
   expect(wrapper.instance().isEditable()).toBeTruthy();
@@ -44,7 +47,8 @@ test('should render a card on edit mode correctly', () => {
     {...blackCards[0]}
     editing={true}
   />);
-  expect(wrapper.find(Card.Pick).length).toBe(1);
+  expect(wrapper.find(Pick).length).toBe(1);
+  expect(wrapper.find(Pick.Value).length).toBe(1);
   expect(wrapper.find(Card.Text).length).toBe(1);
   expect(wrapper.find(CardViewButtons).length).toBe(1);
   expect(wrapper.instance().isEditable()).toBeTruthy();

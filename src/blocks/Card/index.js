@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 import Text from './Text';
-import Pick from './Pick';
 
 const Card = styled.div`
   display: flex;
@@ -24,6 +23,5 @@ const Card = styled.div`
 `;
 
 Card.Text = Text;
-Card.Pick = Pick;
 
 export default Card;

@@ -6,6 +6,7 @@ import isInt from 'validator/lib/isInt';
 
 import CardViewButtons from './CardViewButtons';
 import Card from '../blocks/Card';
+import Pick from '../blocks/Pick';
 import P from '../elements/P';
 
 import { addCard, editCard, removeCard, } from '../actions/cards';
@@ -82,10 +83,10 @@ export class CardView extends React.Component {
           disabled={!this.isEditable()}
           focus={!this.isEditable()}
           value={this.props.isPreview ? this.props.text : this.state.text}/>
-        {(this.isBlack() || this.isEditable()) && !this.props.isPreview &&
-          <div style={{display: 'flex', height: '70px'}}>
+          {(this.isBlack() || this.isEditable()) && !this.props.isPreview &&
+          <Pick>
             <P>Pick </P>
-            <Card.Pick
+            <Pick.Value
               onChange={this.onPickChange}
               disabled={!this.isEditable()}
               isBlack={this.isBlack()}
@@ -93,7 +94,7 @@ export class CardView extends React.Component {
               value={this.props.isPreview ? this.props.pick: this.state.pick}
               maxLength={1}
               type="text" />
-          </div>}        
+          </Pick>}        
           {!this.props.isPreview && 
           <CardViewButtons
             adding={this.state.adding}
